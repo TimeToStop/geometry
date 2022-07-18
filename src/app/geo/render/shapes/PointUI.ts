@@ -8,7 +8,7 @@ export class PointUI extends ShapeUI {
   private point: Point;
 
   constructor(point: Point) {
-    super();
+    super(point);
     this.point = point;
   }
 

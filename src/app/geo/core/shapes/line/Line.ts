@@ -1,13 +1,14 @@
 import { IShape } from "../IShape";
 
-export abstract class Line implements IShape {
-  _a: number = 0;
-  _b: number = 0;
-  _c: number = 0;
+export abstract class Line extends IShape {
+  private _a: number = 0;
+  private _b: number = 0;
+  private _c: number = 0;
 
-  notify: () => void;
+  private readonly notify: () => void;
 
-  constructor(notify: () => void) {
+  constructor(notify: () => void, title: string) {
+    super(title);
     this.notify = notify;
   }
 
@@ -49,6 +50,4 @@ export abstract class Line implements IShape {
   protected setCNoNotify(c: number): void {
     this._c = c;
   }
-
-  abstract calculate(): void;
 }

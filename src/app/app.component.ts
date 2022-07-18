@@ -16,9 +16,15 @@ export class AppComponent implements OnInit {
     const builder = new GeoBuilder();
     const a = builder.coordinatesPoint();
     const b = builder.coordinatesPoint();
+    a.shape.setName('A');
+    b.shape.setName('B');
     b.shape.x = 5;
     b.shape.y = 5;
     const line = builder.twoPointsLine(a, b);
     this.context.shapes = [new PointUI(a.shape), new PointUI(b.shape), new LineUI(line.shape)];
+  }
+
+  onContextChanged(context: WorkspaceContext): void {
+    this.context = context;
   }
 }

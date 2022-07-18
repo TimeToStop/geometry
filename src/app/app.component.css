@@ -1,0 +1,17 @@
+.holder {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.viewer {
+  display: block;
+  width: 100%;
+}
+
+.workspace {
+  display: block;
+  /*width: 70%;*/
+
+  border: 1px solid;
+}

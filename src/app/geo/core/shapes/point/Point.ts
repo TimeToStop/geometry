@@ -1,13 +1,14 @@
 import { IShape } from "../IShape";
 
-export abstract class Point implements IShape {
-  _x: number = 0;
-  _y: number = 0;
+export abstract class Point extends IShape {
+  private _x: number = 0;
+  private _y: number = 0;
 
-  notify: () => void;
+  private readonly notify: () => void;
 
-  constructor(notify: () => void) {
-     this.notify = notify;
+  constructor(notify: () => void, title: string) {
+    super(title);
+    this.notify = notify;
   }
 
   set x(value: number) {
@@ -35,6 +36,4 @@ export abstract class Point implements IShape {
   protected setYNoNotify(y: number): void {
     this._y = y;
   }
-
-  abstract calculate(): void;
 }

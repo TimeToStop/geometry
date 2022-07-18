@@ -8,7 +8,7 @@ export class LineUI extends ShapeUI {
   private line: Line;
 
   constructor(line: Line) {
-    super();
+    super(line);
     this.line = line;
   }
 

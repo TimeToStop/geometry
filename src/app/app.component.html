@@ -1,2 +1,6 @@
-<geo-workspace [context]="context">
-</geo-workspace>
+<div class="holder">
+  <geo-workspace-viewer class="viewer" [context]="context" (contextChanged)="this.onContextChanged($event)">
+  </geo-workspace-viewer>
+<!--  <geo-workspace class="workspace" [context]="context">-->
+<!--  </geo-workspace>-->
+</div>

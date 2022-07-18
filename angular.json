@@ -102,5 +102,7 @@
       }
     }
   },
-  "defaultProject": "geo"
+  "cli": {
+    "analytics": false
+  }
 }
