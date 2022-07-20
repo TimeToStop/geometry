@@ -30,5 +30,5 @@ export interface IRenderEngine {
   fillEllipse(ellipse: IRenderEllipse, options?: IRenderOptions): void;
   rect(rect: IRenderRect, options?: IRenderOptions): void;
   line(line: IRenderLine, options?: IRenderOptions): void;
-  clear(): void;
+  clear(options?: IRenderOptions): void;
 }

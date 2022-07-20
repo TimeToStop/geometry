@@ -102,7 +102,7 @@ export class WorkspaceComponent implements OnChanges {
   draw(): void {
     if (!this.renderEngine) return;
 
-    this.renderEngine.clear();
+    this.renderEngine.clear({ color: '#F6F6F6' });
     this.context.shapes.forEach(shape => shape.draw(this.renderEngine, this.viewport, (point) => this.toPixels(point)));
   }
 

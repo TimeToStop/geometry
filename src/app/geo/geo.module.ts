@@ -7,12 +7,16 @@ import { WorkspaceViewerComponent } from './components/workspace-viewer/workspac
 import { MaterialModule } from "../material/material.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ShapeSelectComponent } from './components/shape-select/shape-select.component';
+import { ShapeInspectorComponent } from './components/shape-inspector/shape-inspector.component';
 
 @NgModule({
   declarations: [
     RenderEngineComponent,
     WorkspaceComponent,
-    WorkspaceViewerComponent
+    WorkspaceViewerComponent,
+    ShapeSelectComponent,
+    ShapeInspectorComponent
   ],
   exports: [
     WorkspaceComponent,

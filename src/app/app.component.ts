@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
     const b = builder.coordinatesPoint();
     a.shape.setName('A');
     b.shape.setName('B');
-    b.shape.x = 5;
-    b.shape.y = 5;
+    b.shape.setX(5);
+    b.shape.setY(5);
     const line = builder.twoPointsLine(a, b);
     this.context.shapes = [new PointUI(a.shape), new PointUI(b.shape), new LineUI(line.shape)];
   }

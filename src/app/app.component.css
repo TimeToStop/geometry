@@ -6,12 +6,11 @@
 
 .viewer {
   display: block;
-  width: 100%;
+  width: 30%;
 }
 
 .workspace {
   display: block;
-  /*width: 70%;*/
-
+  width: 70%;
   border: 1px solid;
 }

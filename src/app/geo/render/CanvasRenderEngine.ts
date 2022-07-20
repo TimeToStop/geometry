@@ -1,7 +1,6 @@
 import { IRenderEllipse, IRenderEngine, IRenderLine, IRenderOptions, IRenderRect } from "./IRenderEngine";
 
 export class CanvasRenderEngine implements IRenderEngine {
-  private readonly backgroundColor = '#FFFFFF';
   private readonly defaultOptions = {
     color: '#000000'
   } as IRenderOptions;
@@ -44,10 +43,11 @@ export class CanvasRenderEngine implements IRenderEngine {
     this.context.stroke();
   }
 
-  clear(): void {
+  clear(options?: IRenderOptions): void {
+    options = this.getOptions(options);
     const w = this.context.canvas.width, h = this.context.canvas.height;
 
-    this.fillRect({ p: { x: 0, y: 0}, width: w, height: h }, { color: this.backgroundColor });
+    this.fillRect({ p: { x: 0, y: 0}, width: w, height: h }, { color: options.color });
   }
 
   private getOptions(options?: IRenderOptions): IRenderOptions {

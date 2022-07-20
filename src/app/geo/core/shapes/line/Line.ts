@@ -1,53 +1,60 @@
-import { IShape } from "../IShape";
+import {IMeta, IShape} from "../IShape";
 
-export abstract class Line extends IShape {
+export abstract class Line implements IShape {
   private _a: number = 0;
   private _b: number = 0;
   private _c: number = 0;
+  private _isAnon: boolean = true;
+  private _name: string = '';
 
   private readonly notify: () => void;
 
-  constructor(notify: () => void, title: string) {
-    super(title);
+  constructor(notify: () => void) {
     this.notify = notify;
   }
 
-  set a(value: number) {
+  abstract calculate(): void;
+  abstract meta(): IMeta;
+
+  protected set a(value: number) {
     this._a = value;
-    this.notify();
   }
 
-  set b(value: number) {
+  protected set b(value: number) {
     this._b = value;
-    this.notify();
   }
 
-  set c(value: number) {
+  protected set c(value: number) {
     this._c = value;
+  }
+
+  protected set name(value: string) {
+    this._name = value;
+  }
+
+  setName(name: string): void {
+    this._isAnon = false;
+    this.name = name;
     this.notify();
   }
 
-  get a(): number {
+  getA(): number {
     return this._a;
   }
 
-  get b(): number {
+  getB(): number {
     return this._b
   }
 
-  get c(): number {
+  getC(): number {
     return this._c;
   }
 
-  protected setANoNotify(a: number): void {
-    this._a = a;
+  isAnon(): boolean {
+    return this._isAnon;
   }
 
-  protected setBNoNotify(b: number): void {
-    this._b = b;
-  }
-
-  protected setCNoNotify(c: number): void {
-    this._c = c;
+  getName(): string {
+    return this._name;
   }
 }

@@ -1,33 +1,20 @@
-export const ANON = 'anon';
+export interface IControl {
+  isReadOnly: boolean;
+  title: string;
 
-export abstract class IShape {
-  private isDefault: boolean = true;
-  private isAnon: boolean = true;
-  private name: string = '';
-  private title: string = '';
+  isValid?: (value: string) => boolean;
+  setValue?: (value: string) => void;
 
-  constructor(title: string) {
-    this.title = title;
-  }
+  getValue: () => string;
+}
 
-  abstract calculate(): void;
-  abstract defaultName(): string;
+export interface IMeta {
+  controls: IControl[];
+  deps: IShape[];
+  title: string;
+}
 
-  setName(name: string): void {
-    this.isDefault = false;
-    this.isAnon = false;
-    this.name = name;
-  }
-
-  getName(): string {
-    return this.isDefault ? this.defaultName() : this.name;
-  }
-
-  getTitle(): string {
-    return this.title;
-  }
-
-  isAnonymous(): boolean {
-    return this.isAnon;
-  }
+export interface IShape {
+  calculate(): void;
+  meta(): IMeta;
 }

@@ -1,0 +1,11 @@
+<form [formGroup]="this.form" class="form" (submit)="$event.preventDefault()">
+  <mat-form-field appearance="fill">
+    <mat-label>Shape</mat-label>
+    <input matInput [value]="this.info.title" [readonly]="true">
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let control of this.keys" appearance="fill">
+    <mat-label>{{ control }}</mat-label>
+    <input matInput [readOnly]="false" [formControlName]="control"/>
+  </mat-form-field>
+</form>

@@ -1,16 +1,11 @@
-<form class="form" (submit)="$event.preventDefault()">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Shape list</mat-label>
-    <input type="text"
-           placeholder="Enter name"
-           aria-label="shapes"
-           matInput
-           [formControl]="shapeFilter"
-           [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)">
-      <mat-option *ngFor="let shape of this.filteredShapes | async" [value]="this.getTitle(shape)">
-        {{ this.getTitle(shape) }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+<geo-shape-select
+  [context]="this.context"
+  (shapeSelected)="this.shapeSelected($event)"
+>
+</geo-shape-select>
+<geo-shape-inspector
+  *ngIf="this.selectedShape"
+  [info]="this.selectedShape.getMeta()"
+  (shapePropertyHasChanged)="this.onChange()"
+>
+</geo-shape-inspector>

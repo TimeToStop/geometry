@@ -1,39 +1,51 @@
-import { IShape } from "../IShape";
+import { IMeta, IShape } from "../IShape";
 
-export abstract class Point extends IShape {
+export abstract class Point implements IShape {
   private _x: number = 0;
   private _y: number = 0;
+  private _isAnon: boolean = true;
+  private _name: string = '';
 
-  private readonly notify: () => void;
+  protected readonly notify: () => void;
 
-  constructor(notify: () => void, title: string) {
-    super(title);
+  constructor(notify: () => void) {
     this.notify = notify;
   }
 
-  set x(value: number) {
+  abstract calculate(): void;
+  abstract meta(): IMeta;
+
+  protected set x(value: number) {
     this._x = value;
-    this.notify();
   }
 
-  set y(value: number) {
+  protected set y(value: number) {
     this._y = value;
+  }
+
+  protected set name(value: string) {
+    this._name = value;
+  }
+
+  setName(name: string): void {
+    this._isAnon = false;
+    this.name = name;
     this.notify();
   }
 
-  get x(): number {
+  getX(): number {
     return this._x;
   }
 
-  get y(): number {
+  getY(): number {
     return this._y
   }
 
-  protected setXNoNotify(x: number): void {
-    this._x = x;
+  isAnon(): boolean {
+    return this._isAnon;
   }
 
-  protected setYNoNotify(y: number): void {
-    this._y = y;
+  getName(): string {
+    return this._name;
   }
 }
