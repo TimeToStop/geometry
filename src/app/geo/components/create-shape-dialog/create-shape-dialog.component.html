@@ -1,0 +1,25 @@
+<div class="main">
+  <form class="form">
+    <p>Create Shape Dialog</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select [value]="this.type.title">
+        <mat-option *ngFor="let type of this.types" [value]="type.title" (click)="this.setType(type)">
+          {{ type.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Definition type</mat-label>
+      <mat-select [value]="this.creation">
+        <mat-option *ngFor="let creation of this.type.creations" [value]="creation" (click)="this.setCreation(creation)">
+          {{ creation }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <div class="footer">
+    <button mat-raised-button class="button" color="primary" (click)="this.addShape()">Create</button>
+    <button mat-stroked-button class="button" (click)="this.closeDialog()">Close</button>
+  </div>
+</div>

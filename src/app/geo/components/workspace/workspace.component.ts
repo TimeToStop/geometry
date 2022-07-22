@@ -37,13 +37,13 @@ export class WorkspaceComponent implements OnChanges {
     this.renderEngine = engine;
   }
 
-  @HostListener('document:mousedown', ['$event'])
+  @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent): void {
     if (event.button === this.LEFT_MOUSE_BUTTON) {
       this.isLeftMouseButtonClicked = true;
       this.mouseHasMovedBetweenClicks = false;
 
-      const p = this.fromPixels({ x: event.clientX, y: event.clientY });
+      const p = this.fromPixels({ x: event.offsetX, y: event.offsetY });
 
       const dragged = this.context.shapes.find(shape => shape.contains(p, (pixels) => this.scale * pixels));
 
@@ -54,7 +54,7 @@ export class WorkspaceComponent implements OnChanges {
     }
   }
 
-  @HostListener('document:mousemove', ['$event'])
+  @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent): void {
     if (this.isLeftMouseButtonClicked) {
       this.mouseHasMovedBetweenClicks = true;
@@ -71,14 +71,14 @@ export class WorkspaceComponent implements OnChanges {
     }
   }
 
-  @HostListener('document:mouseup', ['$event'])
+  @HostListener('mouseup', ['$event'])
   onMouseUp(event: MouseEvent): void {
     if (event.button === this.LEFT_MOUSE_BUTTON) {
         this.isLeftMouseButtonClicked = false;
         this.isDragging = false;
 
         if (!this.mouseHasMovedBetweenClicks) {
-          const p = this.fromPixels({ x: event.clientX, y: event.clientY });
+          const p = this.fromPixels({ x: event.offsetX, y: event.offsetY });
 
           this.context.shapes.forEach(shape => {
             const isSelected = shape.contains(p, (pixels) => this.scale * pixels);

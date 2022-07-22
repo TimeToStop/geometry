@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ShapeSelectComponent } from './components/shape-select/shape-select.component';
 import { ShapeInspectorComponent } from './components/shape-inspector/shape-inspector.component';
+import { CreateShapeDialogComponent } from './components/create-shape-dialog/create-shape-dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { ShapeInspectorComponent } from './components/shape-inspector/shape-insp
     WorkspaceComponent,
     WorkspaceViewerComponent,
     ShapeSelectComponent,
-    ShapeInspectorComponent
+    ShapeInspectorComponent,
+    CreateShapeDialogComponent
   ],
   exports: [
     WorkspaceComponent,
@@ -26,6 +29,7 @@ import { ShapeInspectorComponent } from './components/shape-inspector/shape-insp
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
     MaterialModule,
     CommonModule
   ]

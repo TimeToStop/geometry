@@ -2,10 +2,10 @@ export interface IControl {
   isReadOnly: boolean;
   title: string;
 
+  getValue: () => string;
+
   isValid?: (value: string) => boolean;
   setValue?: (value: string) => void;
-
-  getValue: () => string;
 }
 
 export interface IMeta {

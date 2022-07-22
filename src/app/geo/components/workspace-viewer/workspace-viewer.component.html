@@ -1,11 +1,18 @@
-<geo-shape-select
-  [context]="this.context"
-  (shapeSelected)="this.shapeSelected($event)"
->
-</geo-shape-select>
-<geo-shape-inspector
-  *ngIf="this.selectedShape"
-  [info]="this.selectedShape.getMeta()"
-  (shapePropertyHasChanged)="this.onChange()"
->
-</geo-shape-inspector>
+<div>
+  <div class="header">
+    <geo-shape-select
+      class="left"
+      [context]="this.context"
+      (shapeSelected)="this.shapeSelected($event)"
+    >
+    </geo-shape-select>
+    <button mat-stroked-button class="right" (click)="this.addShape()">Add</button>
+  </div>
+
+  <geo-shape-inspector
+    *ngIf="this.selectedShape"
+    [info]="this.selectedShape.getMeta()"
+    (shapePropertyHasChanged)="this.onChange()"
+  >
+  </geo-shape-inspector>
+</div>
