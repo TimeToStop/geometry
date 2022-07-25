@@ -1,15 +1,15 @@
 import { IRenderEngine } from "../IRenderEngine";
 import { IPoint, IRect } from "../../components/workspace/workspace-context";
-import {IMeta, IShape} from "../../core/shapes/IShape";
+import { IMetaInfo, Shape } from "../../core/shapes/Shape";
 
 export abstract class ShapeUI {
   private isSelected = false;
   private color = 'blue';
   private selectedColor = 'red';
 
-  private shape: IShape;
+  private readonly shape: Shape;
 
-  constructor(shape: IShape) {
+  constructor(shape: Shape) {
     this.shape = shape;
   }
 
@@ -17,8 +17,12 @@ export abstract class ShapeUI {
   abstract draw(engine: IRenderEngine, viewport: IRect, toPixels: (point: IPoint) => IPoint): void;
   abstract move(diff: IPoint): void;
 
-  getMeta(): IMeta {
-    return this.shape.meta();
+  getMeta(): IMetaInfo {
+    return this.shape.getMeta();
+  }
+
+  getShape(): Shape {
+    return this.shape;
   }
 
   setSelection(isSelected: boolean): void {

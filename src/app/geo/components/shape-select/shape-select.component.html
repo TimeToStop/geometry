@@ -3,8 +3,8 @@
     <mat-label>Search</mat-label>
     <input type="text" matInput [formControl]="this.shapeFilter" [matAutocomplete]="auto"/>
     <mat-autocomplete #auto>
-      <mat-option *ngFor="let shape of this.filteredShapes | async" (click)="this.onSelected(shape)" [value]="this.getTitle(shape)">
-        {{ this.getTitle(shape) }}
+      <mat-option *ngFor="let shape of this.filteredShapes | async" (click)="this.onSelected(shape)" [value]="this.context.getTitle(shape)">
+        {{ this.context.getTitle(shape) }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

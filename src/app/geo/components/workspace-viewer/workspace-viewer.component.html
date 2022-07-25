@@ -9,10 +9,10 @@
     <button mat-stroked-button class="right" (click)="this.addShape()">Add</button>
   </div>
 
-  <geo-shape-inspector
-    *ngIf="this.selectedShape"
-    [info]="this.selectedShape.getMeta()"
-    (shapePropertyHasChanged)="this.onChange()"
-  >
-  </geo-shape-inspector>
+ <geo-shape-settings
+   *ngIf="this.selectedShape"
+   [context]="this.context"
+   [info]="this.selectedMetaInfo"
+   (onSettingChanged)="this.contextChanged.emit()"
+ ></geo-shape-settings>
 </div>

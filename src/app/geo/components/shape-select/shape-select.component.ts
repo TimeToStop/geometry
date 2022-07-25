@@ -31,29 +31,18 @@ export class ShapeSelectComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     if (this.lastSelectedShape) {
-      this.shapeFilter.setValue(this.getTitle(this.lastSelectedShape));
+      this.shapeFilter.setValue(this.context.getTitle(this.lastSelectedShape));
     }
   }
 
   filter(value: string): ShapeUI[] {
-    const list = this.context.shapes.map(shape => { return { title: this.getTitle(shape), shape } });
+    const list = this.context.shapes.map(shape => { return { title: this.context.getTitle(shape), shape } });
 
     if (!value) {
       return list.map(element => element.shape);
     }
 
     return list.filter(option => option.title.includes(value)).map(option => option.shape);
-  }
-
-  getTitle(shape: ShapeUI) {
-    let name = 'anon';
-    const nameControl = shape.getMeta().controls.find(control => control.title === 'Name');
-
-    if (nameControl) {
-      name = nameControl.getValue();
-    }
-
-    return `${name}{${shape.getMeta().title}}`;
   }
 
   onSelected(shape: ShapeUI): void {

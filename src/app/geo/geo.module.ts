@@ -8,9 +8,9 @@ import { MaterialModule } from "../material/material.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ShapeSelectComponent } from './components/shape-select/shape-select.component';
-import { ShapeInspectorComponent } from './components/shape-inspector/shape-inspector.component';
 import { CreateShapeDialogComponent } from './components/create-shape-dialog/create-shape-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { ShapeSettingsComponent } from './components/shape-settings/shape-settings.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     WorkspaceComponent,
     WorkspaceViewerComponent,
     ShapeSelectComponent,
-    ShapeInspectorComponent,
-    CreateShapeDialogComponent
+    CreateShapeDialogComponent,
+    ShapeSettingsComponent
   ],
   exports: [
     WorkspaceComponent,

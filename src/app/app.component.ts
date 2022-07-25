@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WorkspaceContext } from "./geo/components/workspace/workspace-context";
-import {PointUI} from "./geo/render/shapes/PointUI";
-import {GeoBuilder} from "./geo/core/shapes/GeoBuilder";
-import {LineUI} from "./geo/render/shapes/LineUI";
+import { PointUI } from "./geo/render/shapes/PointUI";
+import { LineUI } from "./geo/render/shapes/LineUI";
+import { CoordinatesBasedPoint } from "./geo/core/shapes/point/CoordinatesBasedPoint";
+import { TwoPointsLine } from "./geo/core/shapes/line/TwoPointsLine";
 
 @Component({
   selector: 'app-root',
@@ -13,18 +14,22 @@ export class AppComponent implements OnInit {
   context = new WorkspaceContext();
 
   ngOnInit(): void {
-    const builder = new GeoBuilder();
-    const a = builder.coordinatesPoint();
-    const b = builder.coordinatesPoint();
-    a.shape.setName('A');
-    b.shape.setName('B');
-    b.shape.setX(5);
-    b.shape.setY(5);
-    const line = builder.twoPointsLine(a, b);
-    this.context.shapes = [new PointUI(a.shape), new PointUI(b.shape), new LineUI(line.shape)];
+    // const a = new CoordinatesBasedPoint();
+    // const b = new CoordinatesBasedPoint();
+    // a.setName('A');
+    // b.setName('B');
+    // b.setX(5);
+    // b.setY(5);
+    // const line = new TwoPointsLine();
+    // line.p1 = a;
+    // line.p2 = b;
+    // this.context.shapes = [new PointUI(a), new PointUI(b), new LineUI(line)];
   }
 
-  onContextChanged(context: WorkspaceContext): void {
-    this.context = context;
+  onContextChanged(): void {
+    // TODO: refactor it, change event?
+    const { shapes } = this.context;
+    this.context = new WorkspaceContext();
+    shapes.forEach(shape => this.context.addShape(shape.getShape()));
   }
 }

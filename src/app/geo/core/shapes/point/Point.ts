@@ -1,19 +1,14 @@
-import { IMeta, IShape } from "../IShape";
+import { Shape, ShapeType } from "../Shape";
 
-export abstract class Point implements IShape {
+export abstract class Point extends Shape {
   private _x: number = 0;
   private _y: number = 0;
   private _isAnon: boolean = true;
   private _name: string = '';
 
-  protected readonly notify: () => void;
-
-  constructor(notify: () => void) {
-    this.notify = notify;
+  constructor() {
+    super(ShapeType.POINT);
   }
-
-  abstract calculate(): void;
-  abstract meta(): IMeta;
 
   protected set x(value: number) {
     this._x = value;
@@ -30,7 +25,7 @@ export abstract class Point implements IShape {
   setName(name: string): void {
     this._isAnon = false;
     this.name = name;
-    this.notify();
+    this.recount();
   }
 
   getX(): number {

@@ -3,6 +3,7 @@ import { WorkspaceContext } from "../workspace/workspace-context";
 import { ShapeUI } from "../../render/shapes/ShapeUI";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateShapeDialogComponent, ICreateShapeDialogData } from "../create-shape-dialog/create-shape-dialog.component";
+import {IMetaInfo} from "../../core/shapes/Shape";
 
 
 @Component({
@@ -15,29 +16,34 @@ export class WorkspaceViewerComponent {
   context: WorkspaceContext;
 
   @Output()
-  contextChanged = new EventEmitter<WorkspaceContext>();
+  contextChanged = new EventEmitter<void>();
 
   selectedShape: ShapeUI;
+  selectedMetaInfo: IMetaInfo;
 
   constructor(private dialog: MatDialog) {
   }
 
   shapeSelected(shape: ShapeUI): void {
     this.selectedShape = shape;
-  }
-
-  onChange(): void {
-    this.context = { ... this.context };
-    this.contextChanged.emit(this.context);
+    this.selectedMetaInfo = shape.getMeta();
   }
 
   addShape(): void {
     const dialog = this.dialog.open<CreateShapeDialogComponent>(CreateShapeDialogComponent, {
       width: '600px',
-      restoreFocus: false
+      restoreFocus: false,
+      data: {
+        context: this.context
+      }
     });
     dialog.afterClosed().subscribe((data: ICreateShapeDialogData) => {
-      console.log(data);
+      const { isCreated, shape } = data;
+
+      if (isCreated && shape) {
+        this.context.addShape(shape);
+        this.contextChanged.emit();
+      }
     });
   }
 }

@@ -1,22 +1,27 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from "@angular/material/dialog";
-import { IShape } from "../../core/shapes/IShape";
-import {throwError} from "rxjs";
+import {Component, Inject, Input} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {IMetaInfo, Shape} from "../../core/shapes/Shape";
+import { CoordinatesBasedPoint } from "../../core/shapes/point/CoordinatesBasedPoint";
+import { TwoPointsLine } from "../../core/shapes/line/TwoPointsLine";
+import { WorkspaceContext } from "../workspace/workspace-context";
 
 export interface ICreateShapeDialogData {
   isCreated: boolean;
-  shape?: IShape;
+  shape?: Shape;
 }
 
-export enum ShapeType {
-  LINE,
-  POINT
-}
-
-export interface IShapeType {
+export interface ICreationType {
   title: string;
-  value: ShapeType;
-  creations: string[];
+  create: () => Shape;
+}
+
+export interface ICreationShapeType {
+  title: string;
+  creations: ICreationType[];
+}
+
+export interface ICreateShapeDialogInput {
+  context: WorkspaceContext;
 }
 
 @Component({
@@ -26,39 +31,58 @@ export interface IShapeType {
 })
 export class CreateShapeDialogComponent {
 
-  readonly types: IShapeType[] = [
+  context: WorkspaceContext;
+
+  readonly types: ICreationShapeType[] = [
     {
       title: 'Point',
-      value: ShapeType.POINT,
-      creations: [ 'Coordinates Point' ]
+      creations: [
+        {
+          title: 'Coordinates Point',
+          create: () => new CoordinatesBasedPoint()
+        }
+      ]
     },
     {
       title: 'Line',
-      value: ShapeType.LINE,
-      creations: [ 'Between Points' ]
+      creations: [
+        {
+          title: 'Between Points',
+          create: () => new TwoPointsLine()
+        }
+      ]
     }
   ];
 
-  creation: string = this.types[0].creations[0];
-  type: IShapeType = this.types[0];
+  type: ICreationShapeType = this.types[0];
+  creation: ICreationType = this.types[0].creations[0];
+  shape: Shape = this.types[0].creations[0].create();
+  info: IMetaInfo = this.shape.getMeta();
 
-  constructor(private dialog: MatDialogRef<CreateShapeDialogComponent, ICreateShapeDialogData>) {
+  constructor(private dialog: MatDialogRef<CreateShapeDialogComponent, ICreateShapeDialogData>,
+              @Inject(MAT_DIALOG_DATA) data: ICreateShapeDialogInput
+  ) {
+    this.context = data.context;
   }
 
   addShape(): void {
-    this.dialog.close({ isCreated: true, shape: undefined });
+    this.dialog.close({ isCreated: true, shape: this.shape });
   }
 
   closeDialog(): void {
     this.dialog.close({ isCreated: false });
   }
 
-  setType(type: IShapeType): void {
+  setType(type: ICreationShapeType): void {
     this.type = type;
     this.creation = this.type.creations[0];
+    this.shape = this.type.creations[0].create();
+    this.info = this.shape.getMeta();
   }
 
-  setCreation(creation: string): void {
+  setCreation(creation: ICreationType): void {
     this.creation = creation;
+    this.shape = this.creation.create();
+    this.info = this.shape.getMeta();
   }
 }

@@ -1,20 +1,15 @@
-import {IMeta, IShape} from "../IShape";
+import {Shape, ShapeType} from "../Shape";
 
-export abstract class Line implements IShape {
+export abstract class Line extends Shape {
   private _a: number = 0;
   private _b: number = 0;
   private _c: number = 0;
   private _isAnon: boolean = true;
   private _name: string = '';
 
-  private readonly notify: () => void;
-
-  constructor(notify: () => void) {
-    this.notify = notify;
+  constructor() {
+    super(ShapeType.LINE);
   }
-
-  abstract calculate(): void;
-  abstract meta(): IMeta;
 
   protected set a(value: number) {
     this._a = value;
@@ -35,7 +30,7 @@ export abstract class Line implements IShape {
   setName(name: string): void {
     this._isAnon = false;
     this.name = name;
-    this.notify();
+    this.recount();
   }
 
   getA(): number {

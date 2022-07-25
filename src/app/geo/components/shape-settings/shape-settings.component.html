@@ -1,0 +1,15 @@
+<form [formGroup]="this.form" class="form" (submit)="$event.preventDefault()">
+  <mat-form-field *ngFor="let control of this.keys" appearance="fill">
+    <mat-label>{{ control }}</mat-label>
+    <input matInput [readOnly]="false" [formControlName]="control"/>
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let dep of this.info.deps" appearance="fill">
+    <mat-label>{{ dep.title }}</mat-label>
+    <mat-select [value]="this.getCurrentShapeTitle(dep)">
+      <mat-option *ngFor="let shape of this.getFilteredShapes(dep.type)" (click)="this.onSelectedDep(shape, dep)" [value]="this.context.getTitle(shape)">
+        {{ this.context.getTitle(shape) }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

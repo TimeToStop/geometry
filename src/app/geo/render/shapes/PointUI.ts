@@ -2,7 +2,6 @@ import { ShapeUI } from "./ShapeUI";
 import { Point } from "../../core/shapes/point/Point";
 import { IRenderEngine } from "../IRenderEngine";
 import { IPoint, IRect } from "../../components/workspace/workspace-context";
-import {IControl} from "../../core/shapes/IShape";
 
 export class PointUI extends ShapeUI {
   private readonly r: number = 5;

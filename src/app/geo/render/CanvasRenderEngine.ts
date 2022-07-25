@@ -54,7 +54,7 @@ export class CanvasRenderEngine implements IRenderEngine {
     const full = { } as IRenderOptions;
 
     if (!options) {
-      return { ... this.defaultOptions};
+      return { ... this.defaultOptions };
     }
 
     Object.keys(this.defaultOptions).forEach((key) => {

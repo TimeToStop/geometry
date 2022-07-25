@@ -1,19 +1,34 @@
 import { Line } from "./Line";
 import { Point } from "../point/Point";
-import { IMeta } from "../IShape";
+import {IMetaInfo, IShapeInfo, Shape, ShapeType} from "../Shape";
 
 export class TwoPointsLine extends Line {
-  private readonly p1: Point;
-  private readonly p2: Point;
+  private _p1: Point;
+  private _p2: Point;
 
-  constructor(p1: Point, p2: Point, notify: () => void) {
-    super(notify);
+  set p1(value: Point) {
+    this.setUpDependency(value, this._p1);
+    this._p1 = value;
+    this.recount();
+  }
 
-    this.p1 = p1;
-    this.p2 = p2;
+  set p2(value: Point) {
+    this.setUpDependency(value, this._p2);
+    this._p2 = value;
+    this.recount();
+  }
+
+  get p1(): Point {
+    return this._p1;
+  }
+
+  get p2(): Point {
+    return this._p2;
   }
 
   calculate(): void {
+    if (!this.p1 || !this.p2) return;
+
     const x1 = this.p1.getX(), y1 = this.p1.getY();
     const x2 = this.p2.getX(), y2 = this.p2.getY();
 
@@ -29,14 +44,15 @@ export class TwoPointsLine extends Line {
   }
 
 
-  meta(): IMeta {
+  meta(): IShapeInfo {
     return {
+      title: "Line",
       controls: [
         {
           isReadOnly: false,
           title: 'Name',
-          isValid: (value) => value.length !== 0,
-          setValue: (value) => this.name = value,
+          isValid: (value: string) => value.length !== 0,
+          setValue: (value: string) => this.setName(value),
           getValue: () => this.getName()
         },
         {
@@ -45,8 +61,28 @@ export class TwoPointsLine extends Line {
           getValue: () => `${this.getA()} * x + ${this.getB()} * y + ${this.getC()} = 0`
         }
       ],
-      deps: [ this.p1, this.p2 ],
-      title: "Line"
+      deps: [
+        {
+          title: 'P1',
+          type: ShapeType.POINT,
+          getValue: () => this.p1,
+          setValue: (value: Shape) => {
+            if (value.getMeta().type !== ShapeType.POINT) throw new Error('Expected type Point');
+
+            this.p1 = value as Point;
+          }
+        },
+        {
+          title: 'P2',
+          type: ShapeType.POINT,
+          getValue: () => this.p2,
+          setValue: (value: Shape) => {
+            if (value.getMeta().type !== ShapeType.POINT) throw new Error('Expected type Point');
+
+            this.p2 = value as Point;
+          }
+        }
+      ]
     };
   }
 }

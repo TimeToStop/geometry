@@ -1,5 +1,5 @@
 <div class="main">
-  <form class="form">
+  <form class="form" (submit)="$event.preventDefault()">
     <p>Create Shape Dialog</p>
     <mat-form-field appearance="fill">
       <mat-label>Type</mat-label>
@@ -11,12 +11,14 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Definition type</mat-label>
-      <mat-select [value]="this.creation">
-        <mat-option *ngFor="let creation of this.type.creations" [value]="creation" (click)="this.setCreation(creation)">
-          {{ creation }}
+      <mat-select [value]="this.creation.title">
+        <mat-option *ngFor="let creation of this.type.creations" [value]="creation.title" (click)="this.setCreation(creation)">
+          {{ creation.title }}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <geo-shape-settings [context]="this.context" [info]="this.info">
+    </geo-shape-settings>
   </form>
   <div class="footer">
     <button mat-raised-button class="button" color="primary" (click)="this.addShape()">Create</button>
