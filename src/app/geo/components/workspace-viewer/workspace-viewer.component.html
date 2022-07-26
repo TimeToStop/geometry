@@ -15,4 +15,8 @@
    [info]="this.selectedMetaInfo"
    (onSettingChanged)="this.contextChanged.emit()"
  ></geo-shape-settings>
+
+  <div *ngIf="this.selectedShape" class="footer">
+    <button mat-stroked-button (click)="this.deleteShape()">Delete</button>
+  </div>
 </div>

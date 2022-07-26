@@ -11,3 +11,8 @@
 .right {
   width: 20%;
 }
+
+.footer {
+  display: flex;
+  justify-content: right;
+}

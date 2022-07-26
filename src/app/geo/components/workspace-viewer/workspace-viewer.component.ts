@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { WorkspaceContext } from "../workspace/workspace-context";
 import { ShapeUI } from "../../render/shapes/ShapeUI";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateShapeDialogComponent, ICreateShapeDialogData } from "../create-shape-dialog/create-shape-dialog.component";
-import {IMetaInfo} from "../../core/shapes/Shape";
-
+import { IMetaInfo } from "../../core/shapes/Shape";
 
 @Component({
   selector: 'geo-workspace-viewer',
@@ -18,7 +17,7 @@ export class WorkspaceViewerComponent {
   @Output()
   contextChanged = new EventEmitter<void>();
 
-  selectedShape: ShapeUI;
+  selectedShape: ShapeUI | null;
   selectedMetaInfo: IMetaInfo;
 
   constructor(private dialog: MatDialog) {
@@ -45,5 +44,13 @@ export class WorkspaceViewerComponent {
         this.contextChanged.emit();
       }
     });
+  }
+
+  deleteShape(): void {
+    if (this.selectedShape) {
+      this.context.deleteShape(this.selectedShape);
+      this.selectedShape = null;
+      this.contextChanged.emit();
+    }
   }
 }
