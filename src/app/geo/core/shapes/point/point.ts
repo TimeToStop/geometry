@@ -1,4 +1,4 @@
-import { Shape, ShapeType } from "../Shape";
+import { Shape, ShapeType } from "../shape";
 
 export abstract class Point extends Shape {
   private _x: number = 0;

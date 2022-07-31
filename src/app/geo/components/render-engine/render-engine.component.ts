@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { IRenderEngine } from "../../render/IRenderEngine";
-import { CanvasRenderEngine } from "../../render/CanvasRenderEngine";
+import { IRenderEngine } from "../../render/irender-engine";
+import { CanvasRenderEngine } from "../../render/canvas-render-engine";
 
 export interface ISize {
   width: number;

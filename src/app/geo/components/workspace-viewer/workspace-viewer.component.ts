@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { WorkspaceContext } from "../workspace/workspace-context";
-import { ShapeUI } from "../../render/shapes/ShapeUI";
+import { ShapeUI } from "../../render/shapes/shape-ui";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateShapeDialogComponent, ICreateShapeDialogData } from "../create-shape-dialog/create-shape-dialog.component";
-import { IMetaInfo } from "../../core/shapes/Shape";
+import { IMetaInfo } from "../../core/shapes/shape";
 
 @Component({
   selector: 'geo-workspace-viewer',

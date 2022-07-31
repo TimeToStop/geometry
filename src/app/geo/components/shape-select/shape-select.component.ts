@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { WorkspaceContext } from "../workspace/workspace-context";
-import { ShapeUI } from "../../render/shapes/ShapeUI";
+import { ShapeUI } from "../../render/shapes/shape-ui";
 import { FormControl } from "@angular/forms";
 import { map, Observable, startWith } from "rxjs";
-import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 
 @Component({
   selector: 'geo-shape-select',

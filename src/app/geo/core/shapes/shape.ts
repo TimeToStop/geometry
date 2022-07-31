@@ -1,3 +1,5 @@
+import {GeoEvents} from "../events/events";
+
 export enum ShapeType {
   POINT,
   LINE
@@ -33,23 +35,26 @@ export interface IMetaInfo {
   title: string;
   controls: IControl[];
   deps: IShapeDependency[];
-  onChange: (callback: () => void) => (() => void)
+  onChange: (callback: (shape: Shape) => void) => (() => void);
+  onDestroy: (callback: () => void) => (() => void);
 }
 
-enum RecountState {
+enum State {
   READY,
-  RECOUNTING
+  RECOUNTING,
+  DESTROYED
 }
-
-let idGen = 0;
 
 export abstract class Shape {
-  private unique: number = 0;
-  private readonly id: number = ++idGen;
+  private static idGen: number = 0;
+
+  private readonly id: number = ++Shape.idGen;
   private readonly type: ShapeType;
-  private state: RecountState = RecountState.READY;
-  private callbacks: Map<number, () => void> = new Map<number, () => void>();
+  private state: State = State.READY;
   private unsubscribes: Map<Shape, () => void> = new Map<Shape, () => void>();
+
+  private readonly onChangeEvent: GeoEvents<Shape> = new GeoEvents<Shape>();
+  private readonly onDestroyEvent: GeoEvents<void> = new GeoEvents<void>();
 
   constructor(type: ShapeType) {
     this.type = type;
@@ -61,18 +66,25 @@ export abstract class Shape {
   getMeta(): IMetaInfo {
     const info = this.meta();
 
-    return { ... info, id: this.id, type: this.type, onChange: callback => this.onChanges(callback) };
+    return {
+      ... info,
+      id: this.id,
+      type: this.type,
+      onChange: callback => this.onChanges(callback),
+      onDestroy: callback => this.onDestroy(callback)
+    };
   }
 
   recount(): void {
-    if (this.state !== RecountState.READY) throw new Error('Circular dependency detected');
+    if (this.state === State.DESTROYED) throw new Error('Recount called on destroyed shape');
+    if (this.state === State.RECOUNTING) throw new Error('Circular dependency detected');
 
-    this.state = RecountState.RECOUNTING;
+    this.state = State.RECOUNTING;
 
     this.calculate();
-    this.callbacks.forEach(call => call());
+    this.onChangeEvent.emit(this);
 
-    this.state = RecountState.READY;
+    this.state = State.READY;
   }
 
   setUpDependency(shape: Shape, prev?: Shape): void {
@@ -91,15 +103,12 @@ export abstract class Shape {
     this.unsubscribes.set(shape, call);
   }
 
-  onChanges(call: () => void): () => void {
-    const id = ++this.unique;
-    this.callbacks.set(id, call);
+  onChanges(call: (shape: Shape) => void): () => void {
+    return this.onChangeEvent.subscribe((shape: Shape) => call(shape));
+  }
 
-    return () => {
-      if (this.callbacks.has(id)) {
-        this.callbacks.delete(id);
-      }
-    };
+  onDestroy(call: () => void): () => void {
+    return this.onDestroyEvent.subscribe(() => call());
   }
 
   getId(): number {
@@ -107,7 +116,11 @@ export abstract class Shape {
   }
 
   destroy(): void {
-    this.callbacks.clear();
-    this.unsubscribes.forEach(call => call());
+    this.state = State.DESTROYED;
+    this.unsubscribes.forEach((call: () => void, dep: Shape) => {
+      call();
+      dep.destroy();
+    });
+    this.onDestroyEvent.emit();
   }
 }

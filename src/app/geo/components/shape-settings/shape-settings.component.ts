@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { WorkspaceContext } from "../workspace/workspace-context";
-import { IControl, IMetaInfo, IShapeDependency, Shape, ShapeType } from "../../core/shapes/Shape";
+import { IControl, IMetaInfo, IShapeDependency, Shape, ShapeType } from "../../core/shapes/shape";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { ShapeUI } from "../../render/shapes/ShapeUI";
+import { ShapeUI } from "../../render/shapes/shape-ui";
 
 export const createValidator = (control: IControl): typeof validator => {
   const validator: ValidatorFn = (field: AbstractControl): ValidationErrors | null => {
@@ -37,6 +37,7 @@ export class ShapeSettingsComponent implements OnChanges, OnDestroy {
   form: FormGroup;
 
   unsubscribe: () => void;
+
   controls: any;
   keys: string[];
 

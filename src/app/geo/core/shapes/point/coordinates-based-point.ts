@@ -1,5 +1,5 @@
-import { Point } from "./Point";
-import {IMetaInfo, IShapeInfo, ShapeType} from "../Shape";
+import { Point } from "./point";
+import { IShapeInfo } from "../shape";
 
 export class CoordinatesBasedPoint extends Point {
 

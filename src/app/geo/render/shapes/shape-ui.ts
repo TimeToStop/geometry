@@ -1,6 +1,6 @@
-import { IRenderEngine } from "../IRenderEngine";
+import { IRenderEngine } from "../irender-engine";
 import { IPoint, IRect } from "../../components/workspace/workspace-context";
-import { IMetaInfo, Shape } from "../../core/shapes/Shape";
+import { IMetaInfo, Shape } from "../../core/shapes/shape";
 
 export abstract class ShapeUI {
   private isSelected = false;

@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
 
-import { AppComponent } from './app.component';
-import { GeoModule } from './geo/geo.module';
+import { AppComponent } from "./app.component";
+import { GeoModule } from "./geo/geo.module";
 
 @NgModule({
   declarations: [

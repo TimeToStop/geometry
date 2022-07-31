@@ -1,8 +1,8 @@
 import { Component, HostListener, Input, OnChanges } from '@angular/core';
-import { IRenderEngine } from "../../render/IRenderEngine";
+import { IRenderEngine } from "../../render/irender-engine";
 import { IPoint, IRect, WorkspaceContext } from "./workspace-context";
 import { ISize } from "../render-engine/render-engine.component";
-import { ShapeUI } from "../../render/shapes/ShapeUI";
+import { ShapeUI } from "../../render/shapes/shape-ui";
 
 @Component({
   selector: 'geo-workspace',

@@ -1,7 +1,7 @@
-import { ShapeUI } from "./ShapeUI";
-import { IRenderEngine } from "../IRenderEngine";
+import { ShapeUI } from "./shape-ui";
+import { IRenderEngine } from "../irender-engine";
 import { IPoint, IRect } from "../../components/workspace/workspace-context";
-import { Line } from "../../core/shapes/line/Line";
+import { Line } from "../../core/shapes/line/line";
 
 export class LineUI extends ShapeUI {
   private readonly width: number = 2;

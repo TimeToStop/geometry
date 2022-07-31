@@ -1,9 +1,9 @@
-import { ShapeUI } from "../../render/shapes/ShapeUI";
-import { Shape, ShapeType } from "../../core/shapes/Shape";
-import { PointUI } from "../../render/shapes/PointUI";
-import { Point } from "../../core/shapes/point/Point";
-import { LineUI } from "../../render/shapes/LineUI";
-import { Line } from "../../core/shapes/line/Line";
+import { ShapeUI } from "../../render/shapes/shape-ui";
+import { Shape, ShapeType } from "../../core/shapes/shape";
+import { PointUI } from "../../render/shapes/point-ui";
+import { Point } from "../../core/shapes/point/point";
+import { LineUI } from "../../render/shapes/line-ui";
+import { Line } from "../../core/shapes/line/line";
 
 export interface IPoint {
   x: number;
@@ -34,7 +34,6 @@ export class WorkspaceContext {
 
     this.shapes.push(creation(shape));
   }
-
 
   deleteShape(toDelete: ShapeUI): void {
     this.shapes = this.shapes.filter(shape => shape !== toDelete);

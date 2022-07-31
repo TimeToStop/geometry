@@ -1,6 +1,6 @@
-import { ShapeUI } from "./ShapeUI";
-import { Point } from "../../core/shapes/point/Point";
-import { IRenderEngine } from "../IRenderEngine";
+import { ShapeUI } from "./shape-ui";
+import { Point } from "../../core/shapes/point/point";
+import { IRenderEngine } from "../irender-engine";
 import { IPoint, IRect } from "../../components/workspace/workspace-context";
 
 export class PointUI extends ShapeUI {

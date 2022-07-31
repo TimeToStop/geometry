@@ -1,6 +1,6 @@
-import { Line } from "./Line";
-import { Point } from "../point/Point";
-import {IMetaInfo, IShapeInfo, Shape, ShapeType} from "../Shape";
+import { Line } from "./line";
+import { Point } from "../point/point";
+import { IShapeInfo, Shape, ShapeType } from "../shape";
 
 export class TwoPointsLine extends Line {
   private _p1: Point;

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkspaceContext } from "./geo/components/workspace/workspace-context";
-import { PointUI } from "./geo/render/shapes/PointUI";
-import { LineUI } from "./geo/render/shapes/LineUI";
-import { CoordinatesBasedPoint } from "./geo/core/shapes/point/CoordinatesBasedPoint";
-import { TwoPointsLine } from "./geo/core/shapes/line/TwoPointsLine";
+import { PointUI } from "./geo/render/shapes/point-ui";
+import { LineUI } from "./geo/render/shapes/line-ui";
+import { CoordinatesBasedPoint } from "./geo/core/shapes/point/coordinates-based-point";
+import { TwoPointsLine } from "./geo/core/shapes/line/two-points-line";
 
 @Component({
   selector: 'app-root',

@@ -1,4 +1,4 @@
-import { IRenderEllipse, IRenderEngine, IRenderLine, IRenderOptions, IRenderRect } from "./IRenderEngine";
+import { IRenderEllipse, IRenderEngine, IRenderLine, IRenderOptions, IRenderRect } from "./irender-engine";
 
 export class CanvasRenderEngine implements IRenderEngine {
   private readonly defaultOptions = {

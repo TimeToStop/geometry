@@ -1,8 +1,8 @@
-import {Component, Inject, Input} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {IMetaInfo, Shape} from "../../core/shapes/Shape";
-import { CoordinatesBasedPoint } from "../../core/shapes/point/CoordinatesBasedPoint";
-import { TwoPointsLine } from "../../core/shapes/line/TwoPointsLine";
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { IMetaInfo, Shape } from "../../core/shapes/shape";
+import { CoordinatesBasedPoint } from "../../core/shapes/point/coordinates-based-point";
+import { TwoPointsLine } from "../../core/shapes/line/two-points-line";
 import { WorkspaceContext } from "../workspace/workspace-context";
 
 export interface ICreateShapeDialogData {
